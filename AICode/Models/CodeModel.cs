@@ -8,8 +8,8 @@ namespace AICode.Models
 {
     public class CodeModel
     {
-        public string reviewvalue { get; set; }
-        public string resultvalue { get; set; }
+        public string prompt { get; set; }
+        public string resultdata { get; set; }
 
     }
 }

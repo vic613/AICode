@@ -10,17 +10,18 @@ namespace AICode.Services
 
     public class BaseService
     {
-        public string ApiUrl = GetApiUrl();    
+        public string ApiUrl = GetApiUrl();
 
         protected static string GetApiUrl()
         {
             ExeConfigurationFileMap configMap = new ExeConfigurationFileMap();
-            configMap.ExeConfigFilename = Environment.CurrentDirectory + @"\AICode\app.config"; ;
+            configMap.ExeConfigFilename = Environment.CurrentDirectory + @"\app.config"; ;
             Configuration config = ConfigurationManager.OpenMappedExeConfiguration(configMap, ConfigurationUserLevel.None);
             var test = config.AppSettings.Settings["ApiUrl"].Value;
             return test;
 
         }
+
     }
 
 }

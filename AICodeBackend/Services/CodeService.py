@@ -1,8 +1,10 @@
+import code
 import os
 from fastapi import HTTPException
 import motor.motor_asyncio
 from Models.CodeModel import CodeModel
-from Server.Common.DBConnection import DBConnection
+from Server.Common.Settings import DBConnection
+from Modules.ModulesTrain.CodeTrain import CodeTrain
     
 client = motor.motor_asyncio.AsyncIOMotorClient(DBConnection.connectionstring,DBConnection.portnumber)
 db = client.AICode
@@ -17,7 +19,7 @@ async def reviewpost(codeModel: CodeModel)->CodeModel:
 
         # if not doc:
         #     raise HTTPException(status_code=404, detail="Not Found")
-
+        CodeTrain.calc()
         return CodeModel(
             value="Success"
         )

@@ -28,12 +28,13 @@ namespace AICode.Services
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
                     CodeModel result = new CodeModel();
-                    result.resultvalue = response.Content.ReadAsStringAsync().Result.ToString();
+                    result.resultdata = response.Content.ReadAsStringAsync().Result.ToString();
                     return result;
                 }
-                else {
+                else
+                {
                     CodeModel result = new CodeModel();
-                    result.resultvalue = "";
+                    result.resultdata = "";
                     return result;
                 }
 
@@ -61,17 +62,17 @@ namespace AICode.Services
 
                 StringContent content = new StringContent(jsonContent, System.Text.Encoding.UTF8, "application/json");
 
-                HttpResponseMessage response = await client.PostAsync(ApiUrl + "/codeapi/codereview", content);
+                HttpResponseMessage response = await client.PostAsync(ApiUrl + "/externalcodeapi/codereview", content);
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
                     CodeModel result = new CodeModel();
-                    result.resultvalue = response.Content.ReadAsStringAsync().Result.ToString();
+                    result.resultdata = response.Content.ReadAsStringAsync().Result.ToString();
                     return result;
                 }
                 else
                 {
                     CodeModel result = new CodeModel();
-                    result.resultvalue = "";
+                    result.resultdata = "";
                     return result;
                 }
 

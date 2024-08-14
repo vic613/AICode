@@ -21,9 +21,9 @@ namespace AICode
         /// </summary>
         public AICodeReviewEditorFormat()
         {
-            this.DisplayName = "AICodeReviewEditor"; // Human readable version of the name
-            this.BackgroundColor = Colors.White;
-            this.TextDecorations = System.Windows.TextDecorations.Underline;
+            //this.DisplayName = "AICodeReviewEditor"; // Human readable version of the name
+            //this.BackgroundColor = Colors.White;
+            //this.TextDecorations = System.Windows.TextDecorations.Underline;
         }
     }
 }

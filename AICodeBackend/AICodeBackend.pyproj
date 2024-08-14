@@ -25,10 +25,15 @@
     <Compile Include="API\CodeAPI.py" />
     <Compile Include="API\LoginAPI.py" />
     <Compile Include="main.py" />
-    <Compile Include="Model\CodeModel.py" />
-    <Compile Include="Model\LoginModel.py" />
+    <Compile Include="Models\CodeModel.py" />
+    <Compile Include="Models\LoginModel.py" />
+    <Compile Include="Models\UserModel.py" />
+    <Compile Include="Modules\ModulesDataLoader\CodeDataLoader.py" />
+    <Compile Include="Modules\ModulesTrains\CodeTrain.py" />
     <Compile Include="routes.py" />
     <Compile Include="Server\Common\dbconnection.py" />
+    <Compile Include="Services\CodeService.py" />
+    <Compile Include="Services\LoginService.py" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="env\">
@@ -42,14 +47,30 @@
     </Interpreter>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Modules\ModulesData\reviews.csv" />
+    <Content Include="Modules\__pycache__\CodeML.cpython-311.pyc" />
+    <Content Include="Models\__pycache__\CodeModel.cpython-311.pyc" />
+    <Content Include="Models\__pycache__\LoginModel.cpython-311.pyc" />
+    <Content Include="Services\__pycache__\CodeService.cpython-311.pyc" />
+    <Content Include="Services\__pycache__\LoginService.cpython-311.pyc" />
     <Content Include="settings.ini" />
     <Content Include="requirements.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="API\" />
-    <Folder Include="Model\" />
+    <Folder Include="Common\" />
+    <Folder Include="Modules\" />
+    <Folder Include="Modules\ModulesModels\" />
+    <Folder Include="Modules\ModulesData\" />
+    <Folder Include="Modules\ModulesTrains\" />
+    <Folder Include="Modules\ModulesDataLoader\" />
+    <Folder Include="Modules\__pycache__\" />
+    <Folder Include="Models\" />
+    <Folder Include="Models\__pycache__\" />
     <Folder Include="Server\" />
     <Folder Include="Server\Common\" />
+    <Folder Include="Services\" />
+    <Folder Include="Services\__pycache__\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

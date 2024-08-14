@@ -5,6 +5,7 @@ from fastapi.responses import RedirectResponse
 from pydantic_settings import BaseSettings
 from API.CodeAPI import codeapi
 from API.LoginAPI import loginapi
+from API.ExternalCodeAPI import externalcodeapi
 from flasgger import Swagger, LazyString, LazyJSONEncoder
 from flasgger import swag_from
 
@@ -18,6 +19,7 @@ settings = Settings()
 app = FastAPI()
 app.include_router(loginapi)
 app.include_router(codeapi)
+app.include_router(externalcodeapi)
 
 #swagger = Swagger(app)
 @app.get("/")

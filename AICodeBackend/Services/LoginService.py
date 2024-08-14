@@ -2,7 +2,7 @@ import os
 from fastapi import HTTPException
 import motor.motor_asyncio
 from Models.LoginModel import LoginModel
-from Server.Common.DBConnection import DBConnection
+from Server.Common.Settings import DBConnection
     
 client = motor.motor_asyncio.AsyncIOMotorClient(DBConnection.connectionstring,DBConnection.portnumber)
 db = client.AICode

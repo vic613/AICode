@@ -9,8 +9,10 @@ namespace AICode.Utilities
 {
     public class CustomHttpClient : HttpClient
     {
-        public CustomHttpClient() { 
-        
+        public CustomHttpClient()
+        {
+            this.Timeout = TimeSpan.FromMinutes(30);
         }
+
     }
 }
