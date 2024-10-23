@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.Shell;
+﻿using AICode.Utilities;
+using Microsoft.VisualStudio.Shell;
 using System;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -47,8 +48,14 @@ namespace AICode
         {
             // When initialized asynchronously, the current thread may be a background thread at this point.
             // Do any initialization that requires the UI thread after switching to the UI thread.
-            await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-            await AICodeReviewCommand.InitializeAsync(this);
+            try
+            {
+                await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+                await AICodeReviewCommand.InitializeAsync(this);
+            }
+            catch (Exception ex) {
+                CustomErrorLog.LogError(ex.Message);
+            }
         }
 
         #endregion

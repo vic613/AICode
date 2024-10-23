@@ -56,6 +56,7 @@
     <Compile Include="AICodeReviewEditorClassificationDefinition.cs" />
     <Compile Include="AICodeReviewEditorFormat.cs" />
     <Compile Include="AICodeReviewEditorProvider.cs" />
+    <Compile Include="AICodeSettings.cs" />
     <Compile Include="Models\ExternalCodeModel.cs" />
     <Compile Include="Models\CodeModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
@@ -65,12 +66,10 @@
     <Compile Include="Services\ExternalCodeService.cs" />
     <Compile Include="Services\CodeService.cs" />
     <Compile Include="Services\LoginService.cs" />
+    <Compile Include="Utilities\CustomErrorLog.cs" />
     <Compile Include="Utilities\CustomHttpClient.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>
@@ -111,7 +110,10 @@
     </VSCTCompile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\AICodeReviewCommand.png" />
+    <Content Include="Resources\AICodeReviewCommand.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="Resources\TestCommand.png" />
   </ItemGroup>
   <ItemGroup>

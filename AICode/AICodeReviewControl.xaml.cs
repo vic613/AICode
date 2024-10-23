@@ -1,5 +1,6 @@
 ﻿using AICode.Models;
 using AICode.Services;
+using AICode.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -21,9 +22,15 @@ namespace AICode
         /// </summary>
         public AICodeReviewControl()
         {
-            this.InitializeComponent();
-            TabVisible();
-            LoadModel();
+            try
+            {
+                this.InitializeComponent();
+                TabVisible();
+                LoadModel();
+            }
+            catch (Exception ex) {
+                CustomErrorLog.LogError(ex.Message);
+            }
         }
 
         private void LoadModel()
@@ -35,16 +42,17 @@ namespace AICode
 
         private void TabVisible()
         {
-
-            ExeConfigurationFileMap configMap = new ExeConfigurationFileMap();
-            configMap.ExeConfigFilename = Environment.CurrentDirectory + @"\app.config"; ;
-            Configuration config = ConfigurationManager.OpenMappedExeConfiguration(configMap, ConfigurationUserLevel.None);
-            var env = config.AppSettings.Settings["Environment"].Value;
-
-            if (env == "Prod")
+            try
             {
-                tiLogin.Visibility = Visibility.Hidden;
-                tiMain.Visibility = Visibility.Hidden;
+          
+                if (AICodeSettings.Environment == "Prod")
+                {
+                    tiLogin.Visibility = Visibility.Hidden;
+                    tiMain.Visibility = Visibility.Hidden;
+                }
+            }
+            catch (Exception ex) {
+                CustomErrorLog.LogError(ex.Message);
             }
         }
 
@@ -79,46 +87,53 @@ namespace AICode
 
         private async void btnReview_click(object sender, RoutedEventArgs e)
         {
-            if (cmbModel.SelectedItem.ToString() == "AICode")
+            try
             {
-                CodeService codeservice = new CodeService();
-                CodeModel codeModel = new CodeModel();
-                codeModel.prompt = txtCurrent.Text;
-                CodeModel task = await codeservice.CodeReviewAsync(codeModel);
-                if (task.resultdata == null)
+                txtResult.Text = string.Empty;
+                if (cmbModel.SelectedItem.ToString() == "AICode")
                 {
-                    MessageBox.Show(
-                        string.Format(System.Globalization.CultureInfo.CurrentUICulture, "Invoked '{0}'", this.ToString()),
-                        "AICodeReview");
-                }
-                else
-                {
-                    txtResult.Text = task.ToString();
+                    CodeService codeservice = new CodeService();
+                    CodeModel codeModel = new CodeModel();
+                    codeModel.prompt = txtCurrent.Text;
+                    CodeModel task = await codeservice.CodeReviewAsync(codeModel);
+                    if (task.resultdata == null)
+                    {
+                        MessageBox.Show(
+                            string.Format(System.Globalization.CultureInfo.CurrentUICulture, "Invoked '{0}'", this.ToString()),
+                            "AICodeReview");
+                    }
+                    else
+                    {
+                        txtResult.Text = task.ToString();
+
+                    }
 
                 }
+                else if (cmbModel.SelectedItem.ToString() == "llama3.1")
+                {
+                    ExternalCodeService codeservice = new ExternalCodeService();
+                    ExternalCodeModel codeModel = new ExternalCodeModel();
+                    codeModel.prompt = txtCurrent.Text;
+                    codeModel.model = "llama3.1";
 
+                    ExternalCodeModel task = await codeservice.ExternalCodeReviewAsync(codeModel);
+                    if (task.response == null)
+                    {
+                        MessageBox.Show(
+                            string.Format(System.Globalization.CultureInfo.CurrentUICulture, "Invoked '{0}'", this.ToString()),
+                            "AICodeReview");
+                    }
+                    else
+                    {
+                        txtResult.Text = task.response.ToString();
+
+                    }
+                }
             }
-            else if (cmbModel.SelectedItem.ToString() == "llama3.1")
+            catch (Exception ex)
             {
-                ExternalCodeService codeservice = new ExternalCodeService();
-                ExternalCodeModel codeModel = new ExternalCodeModel();
-                codeModel.prompt = txtCurrent.Text;
-                codeModel.model = "llama3.1";
-
-                ExternalCodeModel task = await codeservice.ExternalCodeReviewAsync(codeModel);
-                if (task.response == null)
-                {
-                    MessageBox.Show(
-                        string.Format(System.Globalization.CultureInfo.CurrentUICulture, "Invoked '{0}'", this.ToString()),
-                        "AICodeReview");
-                }
-                else
-                {
-                    txtResult.Text = task.response.ToString();
-
-                }
+                CustomErrorLog.LogError(ex.Message);
             }
-
 
 
 

@@ -10,7 +10,7 @@ namespace AICode.Services
 
     public class BaseService
     {
-        public string ApiUrl = GetApiUrl();
+        public string ApiUrl = AICodeSettings.ApiUrl;
 
         protected static string GetApiUrl()
         {
